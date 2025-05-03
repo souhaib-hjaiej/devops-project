@@ -15,20 +15,18 @@ jobs:
         service: [auth-service, reservation-service, salles-service]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: |
-        cd ${{ matrix.service }}
-        npm install
+      - name: Install dependencies
+        run: npm install
+        working-directory: ${{ matrix.service }}
 
-    - name: Run tests
-      run: |
-        cd ${{ matrix.service }}
-        npm test
+      - name: Run tests
+        run: npm test
+        working-directory: ${{ matrix.service }}
