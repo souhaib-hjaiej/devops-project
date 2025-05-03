@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: salles-service
+  labels:
+    app: salles-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: salles-service
+  template:
+    metadata:
+      labels:
+        app: salles-service
+    spec:
+      containers:
+      - name: salles-service
+        image: your-docker-registry/salles-service:latest # Replace with your Docker image
+        ports:
+        - containerPort: 8080
+        env:
+        - name: KAFKA_BROKER
+          value: "kafka:9092" # Ensure this matches your Kafka service name and port
+        - name: DB_HOST
+          value: "db-service" # Replace with the service name of your database
+        - name: DB_PORT
+          value: "3306" # Default MySQL port
+        - name: DB_USER
+          value: "root" # Replace with your DB username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: password
+        - name: DB_NAME
+          value: "your_database_name" # Replace with your DB name

@@ -1,0 +1,37 @@
+# Dependency directories
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Local development files
+.env.local
+.env.development
+
+# IDE and editor files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Test and coverage directories
+coverage/
+*.lcov
+
+# Debug logs
+*.log
+
+# Optional: exclude the Dockerfile and compose files if not needed in the container
+# Dockerfile
+# docker-compose.yml

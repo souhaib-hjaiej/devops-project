@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reservation-service
+  labels:
+    app: reservation-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reservation-service
+  template:
+    metadata:
+      labels:
+        app: reservation-service
+    spec:
+      containers:
+      - name: reservation-service
+        image: your-docker-registry/reservation-service:latest # Replace with your Docker image
+        ports:
+        - containerPort: 8081
+        env:
+        - name: KAFKA_BROKER
+          value: "kafka:9092" # Ensure this matches your Kafka service name and port
+        - name: DB_HOST
+          value: "mysql" # Replace with the service name of your database
+        - name: DB_PORT
+          value: "3306" 
+        - name: DB_USER
+          value: "root" 
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: password
+        - name: DB_NAME
+          value: "gestion_des_salles" # Replace with your DB name
