@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        service: [auth-service, reservation-service, sales-service]
+        service: [auth-service, reservation-service, salles-service]
 
     steps:
     - name: Checkout code
